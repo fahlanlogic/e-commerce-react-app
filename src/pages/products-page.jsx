@@ -2,7 +2,7 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import CardProducts from "../components/fragments/card-products";
 import Button from "../components/elements/button";
-import { getProducts } from "../components/fragments/get-products";
+import { getProducts } from "../components/services/product-services";
 
 // const products = [
 //   {
