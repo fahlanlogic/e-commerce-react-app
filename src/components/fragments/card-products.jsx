@@ -1,5 +1,8 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 import Button from "../elements/button";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/cartSlice";
 
 const CardProducts = (props) => {
   const { children } = props;
@@ -12,11 +15,13 @@ const CardProducts = (props) => {
 }
 
 const Header = (props) => {
-  const { image } = props;
+  const { image, id } = props;
 
   return (
     <div className="px-4 pt-4">
-      <img src={`${image}`} alt="Product 1" className="rounded-lg h-60 object-cover mx-auto"/>
+      <Link to={`/product/${id}`}>
+        <img src={`${image}`} alt="Product 1" className="rounded-lg h-60 object-cover mx-auto"/>
+      </Link>
     </div>
   )
 }
@@ -33,12 +38,12 @@ const Body = (props) => {
 }
 
 const Footer = (props) => {
-  const { price, handlerAddToCart, id } = props;
-
+  const { price, id } = props;
+  const dispatch = useDispatch();
   return (
     <div className="flex items-center px-4 pb-4 justify-between">
       <span className="font-bold text-xl w-full">{price.toLocaleString('id-ID', {style: 'currency', currency: 'IDR'})}</span>
-      <Button className="bg-rose-800 w-full text-white" onClick={() => handlerAddToCart(id)}>Add to cart</Button>
+      <Button className="bg-rose-800 w-full text-white" onClick={() => dispatch(addToCart({ id, qty: 1 }))}>Add to cart</Button>
     </div>
   )
 }

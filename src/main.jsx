@@ -6,6 +6,11 @@ import LoginPage from './pages/login-page.jsx'
 import RegisterPage from './pages/register-page.jsx'
 import ErrorPage from './pages/error-404'
 import ProductsPage from './pages/products-page'
+import ProfilePage from './pages/profile-page'
+import DetailProductPage from './pages/detail-product-page'
+import { Provider } from 'react-redux'
+import store from './store'
+import DarkModeContextProvider from './context/darkMode'
 
 const router = createBrowserRouter([
   {
@@ -24,10 +29,22 @@ const router = createBrowserRouter([
   {
     path: '/products',
     element: <ProductsPage />
+  },
+  {
+    path: '/profile',
+    element: <ProfilePage />
+  },
+  {
+    path: '/product/:id',
+    element: <DetailProductPage />
   }
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <Provider store={store}>
+      <DarkModeContextProvider>
+        <RouterProvider router={router}/>
+      </DarkModeContextProvider>
+    </Provider>
   </React.StrictMode>,
 )
